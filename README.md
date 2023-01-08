@@ -71,3 +71,14 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+## 目录说明
+
+```tree
+├── src
+│   ├── app.controller.spec.ts    针对控制器的单元测试。
+│   ├── app.controller.ts         带有单个路由的基本控制器。
+│   ├── app.module.ts             T应用程序的根模块（root module）。
+│   ├── app.service.ts            具有单一方法的基本服务（service）。 method.
+│   └── main.ts                   应用程序的入口文件，它使用核心函数 NestFactory 来创建 Nest 应用程序的实例。
+```
