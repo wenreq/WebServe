@@ -1,11 +1,18 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ArticleModule } from './article/article.module';
 
 // @Module 装饰器
 @Module({
-  imports: [],
-  controllers: [AppController], // 这个就是哈 把 controller 放在这个里面就好了 通过 @Module 装饰器将元数据附加到模块类中 Nest 可以轻松反射（reflect）出哪些控制器（controller）必须被安装
+  imports: [ArticleModule],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
+
+/**
+ * controllers 控制器
+ * 控制器负责处理传入的请求并将响应返回给客户端。
+ * 控制器的目的是接收应用程序的特定请求。路由机制控制哪个控制器接收哪个请求。通常，每个控制器都有多条路由，不同的路由可以执行不同的动作。
+ */
