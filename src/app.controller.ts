@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Render } from '@nestjs/common';
 import { AppService } from './app.service';
 
 /**
@@ -8,6 +8,13 @@ import { AppService } from './app.service';
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
+
+  @Get()
+  @Render('default/index')
+  getIndex() {
+    return { name: 'wen', age: 28 };
+  }
+
   // 我们可以使用 @Get @Put @Post @Delete 来定义 请求类型。如果你给他传递了参数那么这个参数就是它的路径 如下
   // 结合前面的代码，当我们使用get访问 3000/hello/nihao的时候就能得到 “你好” string的返回
   @Get('/nihao')
