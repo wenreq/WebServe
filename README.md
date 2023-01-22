@@ -77,8 +77,22 @@ Nest is [MIT licensed](LICENSE).
 ```tree
 ├── src
 │   ├── app.controller.spec.ts    针对控制器的单元测试。
-│   ├── app.controller.ts         带有单个路由的基本控制器。
-│   ├── app.module.ts             T应用程序的根模块（root module）。
-│   ├── app.service.ts            具有单一方法的基本服务（service）。 method.
-│   └── main.ts                   应用程序的入口文件，它使用核心函数 NestFactory 来创建 Nest 应用程序的实例。
+│   ├── app.controller.ts         带有单个路由的基本控制器。| 常见功能是用来处理 http 请求以及调用 service 层的处理方法
+│   ├── app.module.ts             T应用程序的根模块（root module）。| 根模块用于处理其他类的引用与共享。
+│   ├── app.service.ts            具有单一方法的基本服务（service）。 method.| 封装通用的业务逻辑、与数据层的交互（例如数据库）、其他额外的一些三方请求
+│   └── main.ts                   应用程序的入口文件，它使用核心函数 NestFactory 来创建 Nest 应用程序的实例。|	应用程序入口文件。它使用 NestFactory 用来创建 Nest 应用实例。
+```
+
+在后续开发项目的过程中，使用约定俗成的 `name.[type]` 规则来创建对应的类型文件，便于查找对应的模块。
+
+## 控制器
+
+`nest g co user` 快速生成一个用户的控制器。
+
+如果不需要每一次生成 `spec` 文件，可以在根目录下的 `nest-cli.json` 添加如下配置，禁用测试用例生成，后续再使用 `CLI` 创建 `Controller` 或者 `Service` 类型文件的时候，将不会继续生成：
+
+```json
+"generateOptions": {
+  "spec": false,
+}
 ```

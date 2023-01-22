@@ -1,3 +1,4 @@
+// 根模块用于处理其他类的引用与共享。
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
