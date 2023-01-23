@@ -4,10 +4,26 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ArticleModule } from './article/article.module';
 import { UserModule } from './user/user.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 // @Module 装饰器
 @Module({
-  imports: [ArticleModule, UserModule],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'mysql', // 数据库类型
+      host: 'localhost', // 数据库的链接地址host
+      port: 3306, // 数据库端口号 3306
+      username: 'root', // 链接账号
+      password: 'admin123', // 链接密码
+      database: 'wenv2_db', // 链接表名
+      retryDelay: 5000, // 重试链接数据库间隔
+      retryAttempts: 10, // 重连次数
+      synchronize: true, // 是否将实体同步到数据库
+      autoLoadEntities: true, // 自动加载实体配置，forFeature() 注册的每个实体都自己动加载
+    }),
+    ArticleModule,
+    UserModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
