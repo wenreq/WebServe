@@ -1,9 +1,23 @@
+/*
+ * @Author: wenreq 294491328@qq.com
+ * @Date: 2023-01-14 17:20:45
+ * @LastEditors: wenreq 294491328@qq.com
+ * @LastEditTime: 2023-01-24 21:11:00
+ * @FilePath: /WebServe/src/main.ts
+ * @Description: 入口js文件
+ */
 // 应用程序入口文件。它使用 NestFactory 用来创建 Nest 应用实例。
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 // 平台：将平台的 application 接口暴露出来 NestExpressApplication
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
+import * as cors from 'cors';
+
+function MiddleWareAll(req: any, res: any, next: any) {
+  console.log('我是全局中间件....');
+  next();
+}
 
 // 异步函数：启动应用程序
 async function bootstrap() {
@@ -25,6 +39,15 @@ async function bootstrap() {
   app.setBaseViewsDir('views');
   app.setViewEngine('ejs');
 
+  // 注册跨域的第三方中间件
+  app.use(cors());
+  // 注册全局中间件
+  app.use(MiddleWareAll);
   await app.listen(3000);
+
+  if (module.hot) {
+    module.hot.accept();
+    module.hot.dispose(() => app.close());
+  }
 }
 bootstrap();

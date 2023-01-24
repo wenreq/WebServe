@@ -2,7 +2,7 @@
  * @Author: wenreq 294491328@qq.com
  * @Date: 2023-01-14 17:20:45
  * @LastEditors: wenreq 294491328@qq.com
- * @LastEditTime: 2023-01-24 15:30:55
+ * @LastEditTime: 2023-01-24 19:59:16
  * @FilePath: /WebServe/src/article/article.service.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -41,7 +41,7 @@ export class ArticleService {
   // 修改
   updateArticle(id: number) {
     const data = new Article();
-    data.title = '春节档票房破19亿！';
+    data.title = '2023年春节档票房破19亿！！';
     return this.article.update(id, data);
   }
 

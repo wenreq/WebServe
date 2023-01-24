@@ -2,7 +2,7 @@
  * @Author: wenreq 294491328@qq.com
  * @Date: 2023-01-14 22:38:52
  * @LastEditors: wenreq 294491328@qq.com
- * @LastEditTime: 2023-01-24 15:40:57
+ * @LastEditTime: 2023-01-24 21:08:33
  * @FilePath: /WebServe/src/article/article.controller.ts
  * @Description: 文章控制器
  */
@@ -42,6 +42,12 @@ export class ArticleController {
   getArticleName(@Param() params): any {
     const name: string = params.name;
     return this.articleService.getArticleName(name);
+  }
+
+  // 跨域 Demo
+  @Get('/corstest')
+  corsTest(): object {
+    return { message: '测试跨域请求成功' };
   }
 
   // @Post()
