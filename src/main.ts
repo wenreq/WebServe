@@ -2,7 +2,7 @@
  * @Author: wenreq 294491328@qq.com
  * @Date: 2023-01-14 17:20:45
  * @LastEditors: wenreq 294491328@qq.com
- * @LastEditTime: 2023-01-24 21:11:00
+ * @LastEditTime: 2023-01-25 20:19:26
  * @FilePath: /WebServe/src/main.ts
  * @Description: 入口js文件
  */
@@ -12,7 +12,9 @@ import { AppModule } from './app.module';
 // 平台：将平台的 application 接口暴露出来 NestExpressApplication
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
-import * as cors from 'cors';
+import { VersioningType } from '@nestjs/common';
+import * as cors from 'cors'; // 跨域
+import * as session from 'express-session';
 
 function MiddleWareAll(req: any, res: any, next: any) {
   console.log('我是全局中间件....');
@@ -43,6 +45,28 @@ async function bootstrap() {
   app.use(cors());
   // 注册全局中间件
   app.use(MiddleWareAll);
+
+  // 开启版本控制前缀
+  app.enableVersioning({
+    type: VersioningType.URI,
+  });
+
+  console.log(session);
+  /**
+   * secret：生成服务端 session 签名 可理解为加盐
+   * name：生成客户端 cookie 的名字 默认 connect.sid
+   * rolling：在每次请求时强制设置 cookie，这将重置 cookie 过期时间（默认：false）
+   * cookie：设置返回到前端 key 的属性，默认值为：{ path: '/', httpOnly: true, secure: false, maxAge:null }
+   */
+  app.use(
+    session({
+      secret: 'wenshaochang',
+      name: 'wsc',
+      rolling: true,
+      cookie: { maxAge: null },
+    }),
+  );
+
   await app.listen(3000);
 
   if (module.hot) {

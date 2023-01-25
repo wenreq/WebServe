@@ -2,23 +2,19 @@
  * @Author: wenreq 294491328@qq.com
  * @Date: 2023-01-14 22:38:52
  * @LastEditors: wenreq 294491328@qq.com
- * @LastEditTime: 2023-01-25 10:27:30
+ * @LastEditTime: 2023-01-25 15:03:15
  * @FilePath: /WebServe/src/article/article.controller.ts
  * @Description: 文章控制器
  */
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Inject,
-} from '@nestjs/common';
+import { Controller, Get, Param, Inject } from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { ComponentsService } from '../components/components.service';
 
-@Controller('article')
+// 版本控制开启后，@Controller 需要如下配置。访问也需要加上前缀：localhost:3000/v1/article/test
+@Controller({
+  path: 'article',
+  version: '1',
+})
 export class ArticleController {
   constructor(
     @Inject('Config') private company: string,
@@ -66,29 +62,4 @@ export class ArticleController {
   corsTest(): object {
     return { message: '测试跨域请求成功' };
   }
-
-  // @Post()
-  // create(@Body() createArticleDto: CreateArticleDto) {
-  //   return this.articleService.create(createArticleDto);
-  // }
-
-  // @Get()
-  // findAll() {
-  //   return this.articleService.findAll();
-  // }
-
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.articleService.findOne(+id);
-  // }
-
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateArticleDto: UpdateArticleDto) {
-  //   return this.articleService.update(+id, updateArticleDto);
-  // }
-
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.articleService.remove(+id);
-  // }
 }

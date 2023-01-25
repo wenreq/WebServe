@@ -96,3 +96,14 @@ Nest is [MIT licensed](LICENSE).
   "spec": false,
 }
 ```
+
+## REST API - Code
+
+- 200 OK
+- 304 Not Modified 协商缓存了
+- 400 Bad Request 参数错误
+- 401 Unauthorized token 错误
+- 402 Forbidden referer origin 验证失败
+- 404 Not Found 接口不存在
+- 500 Internal Server Error 服务端错误
+- 502 Bad Gateway 上游接口有问题或者服务有问题
