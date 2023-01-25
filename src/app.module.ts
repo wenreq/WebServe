@@ -5,6 +5,10 @@ import { AppService } from './app.service';
 import { ArticleModule } from './article/article.module';
 import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+// 块级模块
+import { ComponentsModule } from './components/components.module';
+// 全局模块
+import { ConfigModule } from './config/config.module';
 
 // @Module 装饰器
 @Module({
@@ -23,6 +27,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     }),
     ArticleModule,
     UserModule,
+    ComponentsModule,
+    // ConfigModule,
+    ConfigModule.forRoot('有限责任公司'),
   ],
   controllers: [AppController],
   providers: [AppService],

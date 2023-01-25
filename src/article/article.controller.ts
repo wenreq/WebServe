@@ -2,18 +2,35 @@
  * @Author: wenreq 294491328@qq.com
  * @Date: 2023-01-14 22:38:52
  * @LastEditors: wenreq 294491328@qq.com
- * @LastEditTime: 2023-01-24 21:08:33
+ * @LastEditTime: 2023-01-25 10:27:30
  * @FilePath: /WebServe/src/article/article.controller.ts
  * @Description: 文章控制器
  */
-import { Controller, Get, Post, Body, Patch, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Inject,
+} from '@nestjs/common';
 import { ArticleService } from './article.service';
-import { CreateArticleDto } from './dto/create-article.dto';
-import { UpdateArticleDto } from './dto/update-article.dto';
+import { ComponentsService } from '../components/components.service';
 
 @Controller('article')
 export class ArticleController {
-  constructor(private readonly articleService: ArticleService) {}
+  constructor(
+    @Inject('Config') private company: string,
+    private readonly articleService: ArticleService,
+    private readonly componentsService: ComponentsService,
+  ) {}
+
+  @Get('/test')
+  test() {
+    // return this.componentsService.findAll();
+    return this.company;
+  }
 
   @Get('/add')
   addArticle(): any {
