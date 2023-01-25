@@ -28,11 +28,21 @@ import { ConfigModule } from './config/config.module';
     ArticleModule,
     UserModule,
     ComponentsModule,
-    // ConfigModule,
+    // ConfigModule, // 全局模块
     ConfigModule.forRoot('有限责任公司'),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  // services 自定义名称和自定义值
+  providers: [
+    {
+      provide: 'ABC',
+      useClass: AppService,
+    },
+    {
+      provide: 'Test',
+      useValue: ['TB', 'JD', 'PDD'],
+    },
+  ],
 })
 export class AppModule {}
 

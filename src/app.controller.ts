@@ -1,5 +1,5 @@
 // 常见功能是用来处理 http 请求以及调用 service 层的处理方法
-import { Controller, Get, Render } from '@nestjs/common';
+import { Controller, Get, Inject, Render } from '@nestjs/common';
 import { AppService } from './app.service';
 
 /**
@@ -8,12 +8,16 @@ import { AppService } from './app.service';
  */
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    @Inject('ABC') private readonly appService: AppService,
+    @Inject('Test') private readonly shop: string[],
+  ) {}
 
   @Get()
-  @Render('default/index')
-  getIndex() {
-    return { name: 'wen', age: 28 };
+  // @Render('default/index')
+  getIndex(): string[] {
+    // return { name: 'wen', age: 28 };
+    return this.shop; // ["TB","JD","PDD"]
   }
 
   // 我们可以使用 @Get @Put @Post @Delete 来定义 请求类型。如果你给他传递了参数那么这个参数就是它的路径 如下
