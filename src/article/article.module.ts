@@ -2,7 +2,7 @@
  * @Author: wenreq 294491328@qq.com
  * @Date: 2023-01-14 17:20:45
  * @LastEditors: wenreq 294491328@qq.com
- * @LastEditTime: 2023-01-25 10:06:49
+ * @LastEditTime: 2023-01-26 09:35:47
  * @FilePath: /WebServe/src/article/article.module.ts
  * @Description: 文章模块
  */
@@ -29,7 +29,8 @@ import { ComponentsService } from '../components/components.service';
 // 在 ArticleModule 的类上,实现 NestModule 接口
 export class ArticleModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    // 指定拦截请求类型 method: RequestMethod.GET
+    // 指定拦截请求类型
+    // 'article' | { path: 'article', method: RequestMethod.GET } | ArticleController
     consumer
       .apply(CounterMiddleware)
       .forRoutes({ path: 'article', method: RequestMethod.GET });

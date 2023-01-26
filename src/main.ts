@@ -2,7 +2,7 @@
  * @Author: wenreq 294491328@qq.com
  * @Date: 2023-01-14 17:20:45
  * @LastEditors: wenreq 294491328@qq.com
- * @LastEditTime: 2023-01-25 20:19:26
+ * @LastEditTime: 2023-01-26 09:38:18
  * @FilePath: /WebServe/src/main.ts
  * @Description: 入口js文件
  */
@@ -16,7 +16,9 @@ import { VersioningType } from '@nestjs/common';
 import * as cors from 'cors'; // 跨域
 import * as session from 'express-session';
 
-function MiddleWareAll(req: any, res: any, next: any) {
+import { Request, Response, NextFunction } from 'express';
+function MiddleWareAll(req: Request, res: Response, next: NextFunction) {
+  console.log(req.originalUrl);
   console.log('我是全局中间件....');
   next();
 }
