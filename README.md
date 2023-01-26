@@ -107,3 +107,61 @@ Nest is [MIT licensed](LICENSE).
 - 404 Not Found 接口不存在
 - 500 Internal Server Error 服务端错误
 - 502 Bad Gateway 上游接口有问题或者服务有问题
+
+## RxJs
+
+RxJs 使用的是观察者模式，用来编写异步队列和事件处理。
+
+- `Observable` 可观察的物件
+- `Subscription` 监听 `Observable`
+- `Operators` 纯函数可以处理管道的数据，如 `map`、`filter`、`concat`、`reduce` 等。
+
+案例：
+
+类似于迭代器 `next` 发出通知，`complete` 通知完成。
+
+`subscribe` 订阅 `observable` 发出的通知，也就是一个观察者。
+
+```ts
+import { of, Observable, interval, take, retry} from 'rxjs';
+import { map, filter, findIndex, reduce } from 'rxjs/operators';
+
+const observable = new Observable(subscribe => {
+  subscribe.next(1);
+  subscribe.next(2);
+  subscribe.next(3);
+
+  setTimeout(() => {
+    subscribe.next(4);
+    subscribe.complete();
+  }, 3000)
+})
+
+observable.subscribe({
+  next: (num) => {
+    console.log(num);
+  }
+})
+
+// 0 1 2 3 4
+// pipe 管道；subscribe 观察者；
+interval(500).pipe(take(5).subscribe(e => {
+  console.log(e)
+}))
+
+const subs = interval(500).pipe(retry(3), map(v => ({num:v}))).subscribe(e => {
+  console.log(e);
+  // 到 { num: 10 } 后停止
+  if(e.num === 10) {
+    subs.unsubscribe();
+  }
+})
+
+// 自定义数据
+const subs = of(1,2,3,4,5,6).pipe(map(v => ({num:v})), filter(v => v.num % 2 == 0)).subscribe(e => {
+  console.log(e);
+  if(e.num === 10) {
+    subs.unsubscribe();
+  }
+})
+```
