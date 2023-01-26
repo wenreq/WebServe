@@ -2,7 +2,7 @@
  * @Author: wenreq 294491328@qq.com
  * @Date: 2023-01-14 17:20:45
  * @LastEditors: wenreq 294491328@qq.com
- * @LastEditTime: 2023-01-26 09:38:18
+ * @LastEditTime: 2023-01-26 10:47:22
  * @FilePath: /WebServe/src/main.ts
  * @Description: 入口js文件
  */
@@ -35,7 +35,8 @@ async function bootstrap() {
   // app.useStaticAssets('public', {
   //   prefix: '/static/',
   // });
-  app.useStaticAssets(join(__dirname, '..', 'public'), {
+  // 配置静态资源目录；访问：http://localhost:3000/static/1674700713628.jpeg
+  app.useStaticAssets(join(__dirname, '..', 'images'), {
     prefix: '/static/', // 设置虚拟路径
   });
 

@@ -9,6 +9,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ComponentsModule } from './components/components.module';
 // 全局模块
 import { ConfigModule } from './config/config.module';
+import { UploadModule } from './upload/upload.module';
 
 // @Module 装饰器
 @Module({
@@ -30,6 +31,7 @@ import { ConfigModule } from './config/config.module';
     ComponentsModule,
     // ConfigModule, // 全局模块
     ConfigModule.forRoot('有限责任公司'),
+    UploadModule,
   ],
   controllers: [AppController],
   // services 自定义名称和自定义值
