@@ -2,7 +2,7 @@
  * @Author: wenreq 294491328@qq.com
  * @Date: 2023-01-14 17:20:45
  * @LastEditors: wenreq 294491328@qq.com
- * @LastEditTime: 2023-01-26 21:08:47
+ * @LastEditTime: 2023-01-27 22:08:25
  * @FilePath: /WebServe/src/main.ts
  * @Description: 入口js文件
  */
@@ -16,7 +16,8 @@ import { VersioningType } from '@nestjs/common';
 import * as cors from 'cors'; // 跨域
 import * as session from 'express-session';
 import { Request, Response, NextFunction, application } from 'express';
-import { ResponseInterceptor } from './common/response';
+import { ResponseInterceptor } from './common/response'; // 全局响应拦截
+import { HttpFilter } from './common/filter'; // 全局异常拦截
 
 function MiddleWareAll(req: Request, res: Response, next: NextFunction) {
   console.log(req.originalUrl);
@@ -71,6 +72,8 @@ async function bootstrap() {
     }),
   );
 
+  // 异常拦截器
+  app.useGlobalFilters(new HttpFilter());
   // 响应拦截器
   app.useGlobalInterceptors(new ResponseInterceptor());
 
