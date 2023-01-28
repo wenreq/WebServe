@@ -2,7 +2,7 @@
  * @Author: wenreq 294491328@qq.com
  * @Date: 2023-01-22 10:27:30
  * @LastEditors: wenreq 294491328@qq.com
- * @LastEditTime: 2023-01-25 21:06:42
+ * @LastEditTime: 2023-01-28 12:25:12
  * @FilePath: /WebServe/src/user/user.controller.ts
  * @Description: user controller
  */
@@ -18,12 +18,16 @@ import {
   Req,
   Res,
   Session,
+  ParseIntPipe,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import * as svgCaptcha from 'svg-captcha';
+import * as uuid from 'uuid';
 
+console.log(uuid.v4());
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -72,8 +76,11 @@ export class UserController {
     return this.userService.findAll();
   }
 
+  // 管道
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  // http://localhost:3000/user/36170b71-66f3-47e3-b4a5-5dbdc20bd889
+  findOne(@Param('id', ParseUUIDPipe) id: number) {
+    console.log(typeof id, '===========>');
     return this.userService.findOne(+id);
   }
 

@@ -165,3 +165,20 @@ const subs = of(1,2,3,4,5,6).pipe(map(v => ({num:v})), filter(v => v.num % 2 == 
   }
 })
 ```
+
+## 管道
+
+1. 转换数据
+2. 验证规则
+
+NestJs 提供了八个内置转换 API
+
+- ValidationPipe
+- ParseIntPipe
+- ParseFloatPipe
+- ParseBoolPipe
+- ParseArrayPipe
+- ParseUUIDPipe
+- ParseEnumPipe
+- DefaultValuePipe
+
