@@ -2,7 +2,7 @@
  * @Author: wenreq 294491328@qq.com
  * @Date: 2023-01-27 21:58:13
  * @LastEditors: wenreq 294491328@qq.com
- * @LastEditTime: 2023-01-27 22:05:58
+ * @LastEditTime: 2023-01-29 15:18:36
  * @FilePath: /WebServe/src/common/filter.ts
  * @Description: 异常信息拦截
  */
@@ -25,7 +25,7 @@ export class HttpFilter implements ExceptionFilter {
     response.status(status).json({
       success: false,
       time: new Date(),
-      data: exception.message,
+      data: exception,
       status,
       path: request.path,
     });

@@ -10,6 +10,7 @@ import { ComponentsModule } from './components/components.module';
 // 全局模块
 import { ConfigModule } from './config/config.module';
 import { UploadModule } from './upload/upload.module';
+import { LoginModule } from './login/login.module';
 
 // @Module 装饰器
 @Module({
@@ -32,6 +33,7 @@ import { UploadModule } from './upload/upload.module';
     // ConfigModule, // 全局模块
     ConfigModule.forRoot('有限责任公司'),
     UploadModule,
+    LoginModule,
   ],
   controllers: [AppController],
   // services 自定义名称和自定义值

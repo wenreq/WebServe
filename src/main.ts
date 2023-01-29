@@ -2,7 +2,7 @@
  * @Author: wenreq 294491328@qq.com
  * @Date: 2023-01-14 17:20:45
  * @LastEditors: wenreq 294491328@qq.com
- * @LastEditTime: 2023-01-28 11:40:24
+ * @LastEditTime: 2023-01-29 15:10:15
  * @FilePath: /WebServe/src/main.ts
  * @Description: 入口js文件
  */
@@ -18,6 +18,7 @@ import * as session from 'express-session';
 import { Request, Response, NextFunction, application } from 'express';
 import { ResponseInterceptor } from './common/response'; // 全局响应拦截
 import { HttpFilter } from './common/filter'; // 全局异常拦截
+import { ValidationPipe } from '@nestjs/common';
 
 function MiddleWareAll(req: Request, res: Response, next: NextFunction) {
   console.log(req.originalUrl);
@@ -76,6 +77,9 @@ async function bootstrap() {
   app.useGlobalFilters(new HttpFilter());
   // 响应拦截器
   app.useGlobalInterceptors(new ResponseInterceptor());
+
+  // nest 校验管道
+  app.useGlobalPipes(new ValidationPipe());
 
   await app.listen(3000);
 
