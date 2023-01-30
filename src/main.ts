@@ -18,7 +18,8 @@ import * as session from 'express-session';
 import { Request, Response, NextFunction, application } from 'express';
 import { ResponseInterceptor } from './common/response'; // 全局响应拦截
 import { HttpFilter } from './common/filter'; // 全局异常拦截
-import { ValidationPipe } from '@nestjs/common';
+import { ValidationPipe } from '@nestjs/common'; // 管道
+// import { RoleGuard } from './guard/role.guard';
 
 function MiddleWareAll(req: Request, res: Response, next: NextFunction) {
   console.log(req.originalUrl);
@@ -80,6 +81,9 @@ async function bootstrap() {
 
   // nest 校验管道
   app.useGlobalPipes(new ValidationPipe());
+
+  // nest 全局守卫；加载顺序在中间件后，管道和拦截器之前。
+  // app.useGlobalGuards(new RoleGuard());
 
   await app.listen(3000);
 

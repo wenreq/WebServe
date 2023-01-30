@@ -182,3 +182,8 @@ NestJs 提供了八个内置转换 API
 - ParseEnumPipe
 - DefaultValuePipe
 
+## 守卫
+
+守卫在每个中间件之后执行，但在任何拦截器或管道之前执行。
+
+创建一个守卫：`nest g gu [name]`
