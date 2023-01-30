@@ -11,6 +11,7 @@ import { ComponentsModule } from './components/components.module';
 import { ConfigModule } from './config/config.module';
 import { UploadModule } from './upload/upload.module';
 import { LoginModule } from './login/login.module';
+import { SpiderModule } from './spider/spider.module';
 
 // @Module 装饰器
 @Module({
@@ -34,6 +35,7 @@ import { LoginModule } from './login/login.module';
     ConfigModule.forRoot('有限责任公司'),
     UploadModule,
     LoginModule,
+    SpiderModule,
   ],
   controllers: [AppController],
   // services 自定义名称和自定义值
