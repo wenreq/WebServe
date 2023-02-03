@@ -12,7 +12,7 @@ export class RoleGuard implements CanActivate {
     const admin = this.Reflector.get<string[]>('role', context.getHandler()); // [ 'admin' ]
     const req = context.switchToHttp().getRequest<Request>(); // admin
     console.log('经过了守卫', req.query.role);
-    if (admin.includes(req.query.role as string)) {
+    if (admin && admin.includes(req.query.role as string)) {
       return true;
     } else {
       return false;

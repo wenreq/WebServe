@@ -20,6 +20,7 @@ import { ResponseInterceptor } from './common/response'; // 全局响应拦截
 import { HttpFilter } from './common/filter'; // 全局异常拦截
 import { ValidationPipe } from '@nestjs/common'; // 管道
 // import { RoleGuard } from './guard/role.guard';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 function MiddleWareAll(req: Request, res: Response, next: NextFunction) {
   console.log(req.originalUrl);
@@ -84,6 +85,16 @@ async function bootstrap() {
 
   // nest 全局守卫；加载顺序在中间件后，管道和拦截器之前。
   // app.useGlobalGuards(new RoleGuard());
+
+  // Swagger API 配置
+  const options = new DocumentBuilder()
+    .addBearerAuth()
+    .setTitle('WebServices Api文档')
+    .setDescription('Vue2、Vue3管理系统公用的接口文档')
+    .setVersion('1')
+    .build();
+  const document = SwaggerModule.createDocument(app, options);
+  SwaggerModule.setup('/api-docs', app, document);
 
   await app.listen(3000);
 
