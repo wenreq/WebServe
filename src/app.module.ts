@@ -13,21 +13,23 @@ import { UploadModule } from './upload/upload.module';
 import { LoginModule } from './login/login.module';
 import { SpiderModule } from './spider/spider.module';
 import { GuardModule } from './guard/guard.module';
+import { TestModule } from './test/test.module';
 
 // @Module 装饰器
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql', // 数据库类型
-      host: 'localhost', // 数据库的链接地址host
-      port: 3306, // 数据库端口号 3306
-      username: 'root', // 链接账号
-      password: 'admin123', // 链接密码
-      database: 'wenv2_db', // 链接表名
-      retryDelay: 5000, // 重试链接数据库间隔
-      retryAttempts: 10, // 重连次数
-      synchronize: true, // 是否将实体同步到数据库
-      autoLoadEntities: true, // 自动加载实体配置，forFeature() 注册的每个实体都自己动加载
+      host: 'localhost', // 数据库的连接地址host
+      port: 3306, // 端口号 3306
+      username: 'root', // 账号
+      password: 'admin123', // 密码
+      database: 'wenv2_db', // 库名
+      // entities: [__dirname + '/**/*.entity{.ts, .js}'], // 实体文件
+      retryDelay: 5000, // 重试连接数据库间隔
+      retryAttempts: 10, // 重试连接数据库次数
+      synchronize: true, // 是否自动将实体类同步到数据库；开发环境true，生产环境建议关闭。
+      autoLoadEntities: true, // 自动加载实体配置，forFeature() 注册的每个实体都自己动态加载
     }),
     ArticleModule,
     UserModule,
@@ -38,6 +40,7 @@ import { GuardModule } from './guard/guard.module';
     LoginModule,
     SpiderModule,
     GuardModule,
+    TestModule,
   ],
   controllers: [AppController],
   // services 自定义名称和自定义值
