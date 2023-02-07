@@ -22,6 +22,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': ^5.0.0
   '@typescript-eslint/parser': ^5.0.0
   axios: ^1.2.6
+  bcryptjs: ^2.4.3
   cheerio: 1.0.0-rc.12
   class-transformer: ^0.5.1
   class-validator: ^0.14.0
@@ -80,6 +81,7 @@ devDependencies:
   '@typescript-eslint/eslint-plugin': registry.npmmirror.com/@typescript-eslint/eslint-plugin/5.48.0_k73wpmdolxikpyqun3p36akaaq
   '@typescript-eslint/parser': registry.npmmirror.com/@typescript-eslint/parser/5.48.0_iukboom6ndih5an6iafl45j2fe
   axios: registry.npmmirror.com/axios/1.2.6
+  bcryptjs: registry.npmmirror.com/bcryptjs/2.4.3
   cheerio: registry.npmmirror.com/cheerio/1.0.0-rc.12
   class-transformer: registry.npmmirror.com/class-transformer/0.5.1
   class-validator: registry.npmmirror.com/class-validator/0.14.0
@@ -3496,6 +3498,12 @@ packages:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/base64-js/-/base64-js-1.5.1.tgz}
     name: base64-js
     version: 1.5.1
+    dev: true
+
+  registry.npmmirror.com/bcryptjs/2.4.3:
+    resolution: {integrity: sha512-V/Hy/X9Vt7f3BbPJEi8BdVFMByHi+jNXrYkW3huaybV/kQ0KJg0Y6PkEMbn+zeT+i+SiKZ/HMqJGIIt4LZDqNQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/bcryptjs/-/bcryptjs-2.4.3.tgz}
+    name: bcryptjs
+    version: 2.4.3
     dev: true
 
   registry.npmmirror.com/binary-extensions/2.2.0:

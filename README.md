@@ -2,9 +2,6 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
   <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
     <p align="center">
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
@@ -29,7 +26,7 @@
 ## Installation
 
 ```bash
-$ pnpm install
+pnpm install
 ```
 
 ## Running the app
@@ -80,7 +77,7 @@ Nest is [MIT licensed](LICENSE).
 │   ├── app.controller.ts         带有单个路由的基本控制器。| 常见功能是用来处理 http 请求以及调用 service 层的处理方法
 │   ├── app.module.ts             T应用程序的根模块（root module）。| 根模块用于处理其他类的引用与共享。
 │   ├── app.service.ts            具有单一方法的基本服务（service）。 method.| 封装通用的业务逻辑、与数据层的交互（例如数据库）、其他额外的一些三方请求
-│   └── main.ts                   应用程序的入口文件，它使用核心函数 NestFactory 来创建 Nest 应用程序的实例。|	应用程序入口文件。它使用 NestFactory 用来创建 Nest 应用实例。
+│   └── main.ts                   应用程序的入口文件，它使用核心函数 NestFactory 来创建 Nest 应用程序的实例。| 应用程序入口文件。它使用 NestFactory 用来创建 Nest 应用实例。
 ```
 
 在后续开发项目的过程中，使用约定俗成的 `name.[type]` 规则来创建对应的类型文件，便于查找对应的模块。
@@ -187,3 +184,12 @@ NestJs 提供了八个内置转换 API
 守卫在每个中间件之后执行，但在任何拦截器或管道之前执行。
 
 创建一个守卫：`nest g gu [name]`
+
+## 注册/登录
+
+### 用户注册
+
+1. 密码加密 `pnpm add bcryptjs -D`
+2. 设计用户实体
+
+### register 注册用户
