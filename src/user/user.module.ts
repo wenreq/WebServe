@@ -9,6 +9,7 @@ import { User } from './entities/user.entity';
   imports: [TypeOrmModule.forFeature([User])],
   controllers: [UserController],
   providers: [UserService],
+  exports: [UserService],
 })
 
 // 中间件注入到模块中使用，指定生效的路由
