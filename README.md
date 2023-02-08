@@ -291,9 +291,24 @@ export class User {
 
 ## 注册/登录
 
+[掘金链接](https://juejin.cn/post/7044708915438682148)
+
 ### 用户注册
 
 1. 密码加密 `pnpm add bcryptjs -D`
 2. 设计用户实体
 
 ### register 注册用户
+
+![注册](./images/register_params.png)
+
+### 用户登录
+
+1. passport.js
+2. local 本地认证 `passport-local`
+3. jwt 生成 token
+![token](./images/token.png)
+通过上图可以看出JWT token由三个部分组成，头部（header）、有效载荷（payload）、签名（signature）。
+   - 首先注册一下 JwtModule, 在 auth.module.ts 中实现
+4. 获取用户信息接口实现
+    验证携带的token是否正确，比如获取用户信息接口。

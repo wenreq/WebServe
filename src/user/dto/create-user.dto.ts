@@ -9,6 +9,9 @@ export class CreateUserDto {
   // @Length(3, 10, {
   //   message: '必须是三到十位字符',
   // })
+  @IsNotEmpty({
+    message: '账号不能为空',
+  })
   @IsString()
   username: string;
   // @IsNotEmpty({
@@ -16,6 +19,12 @@ export class CreateUserDto {
   // })
   // @IsNumber()
   // password: string;
+  @IsNotEmpty({
+    message: '密码不能为空',
+  })
   @IsString()
+  @Length(6, 12, {
+    message: '密码长度在 2 到 12 个字符',
+  })
   password: string;
 }

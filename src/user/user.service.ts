@@ -9,7 +9,7 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class UserService {
   constructor(
-    @InjectRepository(User) private readonly user: Repository<User>,
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) {}
 
   // 注册
@@ -17,7 +17,7 @@ export class UserService {
     // 从参数对象中将名字解构出来
     const username = createUserDto.username;
     // 根据名字从数组库中查询
-    const existUser = await this.user.findOne({
+    const existUser = await this.userRepository.findOne({
       where: { username },
     });
     // 查到如果有数据，则抛出用户名已存在的异常信息
@@ -26,8 +26,11 @@ export class UserService {
     }
     // 没有查到，则将数据插入到数据库中
     // 相当于 new User(createUser) 只是创建了一个新的用户对象，save 方法才是执行插入数据。
-    const newUser = await this.user.create(createUserDto);
-    return await this.user.save(newUser);
+    const newUser = await this.userRepository.create(createUserDto);
+    return await this.userRepository.save(newUser);
+    // 2. 隐藏 password 字段
+    // await this.user.save(newUser);
+    // return await this.user.findOne({ where: { username } });
   }
 
   create(createUserDto: CreateUserDto) {
@@ -38,8 +41,8 @@ export class UserService {
     return `This action returns all user`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id) {
+    return await this.userRepository.findOne(id);
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {

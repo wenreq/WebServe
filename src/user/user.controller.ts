@@ -20,6 +20,8 @@ import {
   Session,
   ParseIntPipe,
   ParseUUIDPipe,
+  UseInterceptors,
+  ClassSerializerInterceptor,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -102,12 +104,9 @@ export class UserController {
     return this.userService.findAll();
   }
 
-  // 管道
   @Get(':id')
-  // http://localhost:3000/user/36170b71-66f3-47e3-b4a5-5dbdc20bd889
-  findOne(@Param('id', ParseUUIDPipe) id: number) {
-    console.log(typeof id, '===========>');
-    return this.userService.findOne(+id);
+  findOne(@Param('id') id: string) {
+    return this.userService.findOne(id);
   }
 
   @Patch(':id')
@@ -121,9 +120,11 @@ export class UserController {
   }
 
   // 注册接口定义
-  // @ApiTags('守卫接口') // swagger 文档分组
-  // @ApiOperation({ summary: '注册用户' })
-  // @ApiResponse({ status: 201, type: [User] })
+  @ApiTags('守卫接口') // swagger 文档分组
+  @ApiOperation({ summary: '注册用户' })
+  @ApiResponse({ status: 201, type: [User] })
+  // 1. 隐藏 password
+  @UseInterceptors(ClassSerializerInterceptor)
   @Post('register')
   register(@Body() createUser: CreateUserDto) {
     console.log(createUser);

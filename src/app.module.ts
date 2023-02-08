@@ -14,6 +14,7 @@ import { LoginModule } from './login/login.module';
 import { SpiderModule } from './spider/spider.module';
 import { GuardModule } from './guard/guard.module';
 import { TestModule } from './test/test.module';
+import { AuthModule } from './auth/auth.module';
 
 // @Module 装饰器
 @Module({
@@ -41,6 +42,7 @@ import { TestModule } from './test/test.module';
     SpiderModule,
     GuardModule,
     TestModule,
+    AuthModule,
   ],
   controllers: [AppController],
   // services 自定义名称和自定义值

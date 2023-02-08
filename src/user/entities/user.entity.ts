@@ -1,5 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
-import bcrypt from 'bcryptjs';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const bcrypt = require('bcryptjs');
+import { Exclude } from 'class-transformer';
 
 @Entity()
 export class User {
@@ -12,7 +14,9 @@ export class User {
   @Column({ length: 100 })
   nickname: string; // 昵称
 
+  @Exclude()
   @Column()
+  // @Column({ select: false }) // 隐藏此列
   password: string; // 密码
 
   @Column()
