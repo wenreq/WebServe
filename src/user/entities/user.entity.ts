@@ -44,7 +44,6 @@ export class User {
 
   @BeforeInsert()
   async encryptPwd() {
-    console.log(this.password, bcrypt);
     this.password = await bcrypt.hashSync(this.password);
   }
 }

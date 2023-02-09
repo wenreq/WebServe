@@ -21,7 +21,6 @@ export class LoginPipe implements PipeTransform {
   async transform(value: any, metadata: ArgumentMetadata) {
     const DTO = plainToInstance(metadata.metatype, value); // 将参数反射到类上面
     const errors = await validate(DTO);
-    console.log(errors);
     if (errors.length > 0) {
       throw new HttpException(errors, HttpStatus.BAD_REQUEST);
     }

@@ -7,11 +7,14 @@ import {
   Controller,
   Get,
   Headers,
+  Session,
   Post,
   Req,
   Res,
   UseGuards,
   UseInterceptors,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
@@ -24,7 +27,11 @@ export class AuthController {
   @UseGuards(AuthGuard('local'))
   @UseInterceptors(ClassSerializerInterceptor)
   @Post('login')
-  async login(@Body() user: LoginDto, @Req() req) {
-    return await this.authService.login(req.user);
+  async login(@Body() Body: LoginDto, @Session() session, @Req() req) {
+    if (session.code.toLocaleLowerCase() === Body?.code?.toLocaleLowerCase()) {
+      return await this.authService.login(req.user);
+    } else {
+      throw new HttpException('请检查验证码！', HttpStatus.BAD_REQUEST);
+    }
   }
 }

@@ -7,6 +7,7 @@
  * @Description: user controller
  */
 import {
+  UseGuards,
   Controller,
   Get,
   Post,
@@ -36,8 +37,8 @@ import { User } from './entities/user.entity';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import * as svgCaptcha from 'svg-captcha';
 import * as uuid from 'uuid';
+import { AuthGuard } from '@nestjs/passport';
 
 /**
  * 加密处理 - 同步方法
@@ -55,30 +56,15 @@ import * as uuid from 'uuid';
  */
 // const isOk = bcryptjs.compareSync(password, encryptPassword);
 
-console.log(uuid.v4());
+// console.log(uuid.v4());
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  // 生成校验码 /user/code
-  @Get('code')
-  createCode(@Req() req, @Res() res, @Session() session) {
-    const captcha = svgCaptcha.create({
-      size: 4, // 生成几个验证码
-      fontSize: 50, // 字体大小
-      width: 100, // 宽度
-      height: 34, // 高度
-      background: '#cc9966', // 背景色
-    });
-    session.data = captcha.text;
-    res.type('image/svg+xml');
-    res.send(captcha.data);
-  }
-
   // 提交校验校验码 /user/login
   @Post('login')
   login(@Body() Body, @Session() session) {
-    console.log(Body, session.code); // { name: 'admin', password: '123456', code: '2233'}, teTz
+    // console.log(Body, session.code); // { name: 'admin', password: '123456', code: '2233'}, teTz
     if (session.code.toLocaleLowerCase() === Body?.code?.toLocaleLowerCase()) {
       return {
         code: 200,
@@ -97,11 +83,13 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
+  @ApiOperation({ summary: '获取用户信息' })
+  @ApiBearerAuth() // swagger文档设置token
+  @UseGuards(AuthGuard('jwt'))
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get()
-  // 单个版本控制前缀 http://localhost:3000/v1/user
-  @Version('1')
-  findAll() {
-    return this.userService.findAll();
+  getUserInfo(@Req() req) {
+    return req.user;
   }
 
   @Get(':id')
@@ -127,7 +115,6 @@ export class UserController {
   @UseInterceptors(ClassSerializerInterceptor)
   @Post('register')
   register(@Body() createUser: CreateUserDto) {
-    console.log(createUser);
     return this.userService.register(createUser);
   }
 }
