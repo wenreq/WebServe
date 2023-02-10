@@ -21,6 +21,9 @@ import { HttpFilter } from './common/filter'; // 全局异常拦截
 import { ValidationPipe } from '@nestjs/common'; // 管道
 // import { RoleGuard } from './guard/role.guard';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+// swagger 所显示的模块
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 
 function MiddleWareAll(req: Request, res: Response, next: NextFunction) {
   console.log(req.originalUrl);
@@ -93,7 +96,9 @@ async function bootstrap() {
     .setDescription('Vue2、Vue3管理系统公用的接口文档')
     .setVersion('1')
     .build();
-  const document = SwaggerModule.createDocument(app, options);
+  const document = SwaggerModule.createDocument(app, options, {
+    include: [AuthModule, UserModule],
+  });
   SwaggerModule.setup('/api-docs', app, document);
 
   await app.listen(3000);

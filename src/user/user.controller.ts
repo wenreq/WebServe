@@ -61,28 +61,12 @@ import { AuthGuard } from '@nestjs/passport';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  // 提交校验校验码 /user/login
-  @Post('login')
-  login(@Body() Body, @Session() session) {
-    // console.log(Body, session.code); // { name: 'admin', password: '123456', code: '2233'}, teTz
-    if (session.code.toLocaleLowerCase() === Body?.code?.toLocaleLowerCase()) {
-      return {
-        code: 200,
-        message: '验证码正确',
-      };
-    } else {
-      return {
-        code: 200,
-        message: '验证码错误',
-      };
-    }
-  }
+  // @Post()
+  // create(@Body() createUserDto: CreateUserDto) {
+  //   return this.userService.create(createUserDto);
+  // }
 
-  @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
-  }
-
+  @ApiTags('获取用户信息/注册') // swagger 文档分组
   @ApiOperation({ summary: '获取用户信息' })
   @ApiBearerAuth() // swagger文档设置token
   @UseGuards(AuthGuard('jwt'))
@@ -92,23 +76,23 @@ export class UserController {
     return req.user;
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(id);
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.userService.findOne(id);
+  // }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(+id, updateUserDto);
-  }
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  //   return this.userService.update(+id, updateUserDto);
+  // }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
-  }
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.userService.remove(+id);
+  // }
 
   // 注册接口定义
-  @ApiTags('守卫接口') // swagger 文档分组
+  @ApiTags('获取用户信息/注册') // swagger 文档分组
   @ApiOperation({ summary: '注册用户' })
   @ApiResponse({ status: 201, type: [User] })
   // 1. 隐藏 password
