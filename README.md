@@ -312,3 +312,10 @@ export class User {
    - 首先注册一下 JwtModule, 在 auth.module.ts 中实现
 4. 获取用户信息接口实现
     验证携带的token是否正确，比如获取用户信息接口。
+
+## 第一个 CRUD
+
+1. `nest g res CRUD` 生成目录
+2. dto 校验和 entities 实体类字段的录入。
+3. 在 .module 文件中引入实体文件和 `@nestjs/typeorm` 模块中的 `TypeOrmModule` 对象。`imports: [TypeOrmModule.forFeature([Crud])]`
+4. typeorm 进行依赖注入。在 .service 文件中引入实体文件和 `@nestjs/typeorm` 模块中的 `InjectRepository` 函数。`@InjectRepository(Curd) private readonly curd: Repository<Curd>`
