@@ -7,11 +7,16 @@ import {
   Param,
   Delete,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { CurdService } from './curd.service';
 import { CreateCurdDto } from './dto/create-curd.dto';
 import { UpdateCurdDto } from './dto/update-curd.dto';
+import { AuthGuard } from '@nestjs/passport';
+// import { JwtAuthSelfGuard } from '../auth/jwt-auth-self.guard';
 
+// @UseGuards(JwtAuthSelfGuard)
+@UseGuards(AuthGuard('jwt'))
 @Controller('curd')
 export class CurdController {
   constructor(private readonly curdService: CurdService) {}
