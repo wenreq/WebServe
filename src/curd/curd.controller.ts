@@ -22,7 +22,7 @@ export class CurdController {
   }
 
   @Get()
-  findAll(@Query() query: { keyword: string }) {
+  findAll(@Query() query: { keyword: string; page: number; pageSize: number }) {
     return this.curdService.findAll(query);
   }
 
@@ -34,5 +34,10 @@ export class CurdController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.curdService.remove(+id);
+  }
+
+  @Post('/add/tags')
+  addTags(@Body() params: { tags: string[]; curdId: number }) {
+    return this.curdService.addTags(params);
   }
 }

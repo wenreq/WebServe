@@ -3,7 +3,9 @@ import {
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
+  OneToMany,
 } from 'typeorm';
+import { Tags } from './tags.entity';
 
 @Entity()
 export class Curd {
@@ -23,4 +25,7 @@ export class Curd {
     default: () => 'CURRENT_TIMESTAMP',
   })
   createTime: Date;
+
+  @OneToMany(() => Tags, (tags) => tags.curd)
+  tags: Tags[];
 }
