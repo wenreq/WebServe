@@ -25,6 +25,8 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 
+declare const module: any;
+
 function MiddleWareAll(req: Request, res: Response, next: NextFunction) {
   console.log(req.originalUrl);
   console.log('我是全局中间件....');
@@ -96,13 +98,15 @@ async function bootstrap() {
     .setDescription('Vue2、Vue3管理系统公用的接口文档')
     .setVersion('1')
     .build();
-  const document = SwaggerModule.createDocument(app, options, {
-    include: [AuthModule, UserModule],
-  });
+  // const document = SwaggerModule.createDocument(app, options, {
+  //   include: [AuthModule, UserModule],
+  // });
+  const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('/api-docs', app, document);
 
   await app.listen(3000);
 
+  // 添加热更新
   if (module.hot) {
     module.hot.accept();
     module.hot.dispose(() => app.close());
